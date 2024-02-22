@@ -1,0 +1,262 @@
+[
+    {
+        "id": 1,
+        "position": [
+            100,
+            120
+        ],
+        "width": 80,
+        "height": 40,
+        "rotation": 0
+    },
+    {
+        "id": 2,
+        "position": [
+            100,
+            160
+        ],
+        "width": 80,
+        "height": 40,
+        "rotation": 0
+    },
+    {
+        "id": 3,
+        "position": [
+            100,
+            200
+        ],
+        "width": 80,
+        "height": 40,
+        "rotation": 0
+    },
+    {
+        "id": 4,
+        "position": [
+            100,
+            240
+        ],
+        "width": 80,
+        "height": 40,
+        "rotation": 0
+    },
+    {
+        "id": 5,
+        "position": [
+            100,
+            280
+        ],
+        "width": 80,
+        "height": 40,
+        "rotation": 0
+    },
+    {
+        "id": 6,
+        "position": [
+            100,
+            360
+        ],
+        "width": 80,
+        "height": 40,
+        "rotation": 0
+    },
+    {
+        "id": 7,
+        "position": [
+            100,
+            400
+        ],
+        "width": 80,
+        "height": 40,
+        "rotation": 0
+    },
+    {
+        "id": 8,
+        "position": [
+            100,
+            440
+        ],
+        "width": 80,
+        "height": 40,
+        "rotation": 0
+    },
+    {
+        "id": 9,
+        "position": [
+            100,
+            480
+        ],
+        "width": 80,
+        "height": 40,
+        "rotation": 0
+    },
+    {
+        "id": 10,
+        "position": [
+            100,
+            520
+        ],
+        "width": 80,
+        "height": 40,
+        "rotation": 0
+    },
+    {
+        "id": 11,
+        "position": [
+            200,
+            40
+        ],
+        "width": 40,
+        "height": 80,
+        "rotation": 0
+    },
+    {
+        "id": 12,
+        "position": [
+            240,
+            40
+        ],
+        "width": 40,
+        "height": 80,
+        "rotation": 0
+    },
+    {
+        "id": 13,
+        "position": [
+            280,
+            40
+        ],
+        "width": 40,
+        "height": 80,
+        "rotation": 0
+    },
+    {
+        "id": 14,
+        "position": [
+            320,
+            40
+        ],
+        "width": 40,
+        "height": 80,
+        "rotation": 0
+    },
+    {
+        "id": 15,
+        "position": [
+            360,
+            40
+        ],
+        "width": 40,
+        "height": 80,
+        "rotation": 0
+    },
+    {
+        "id": 16,
+        "position": [
+            520,
+            40
+        ],
+        "width": 40,
+        "height": 80,
+        "rotation": 0
+    },
+    {
+        "id": 17,
+        "position": [
+            560,
+            40
+        ],
+        "width": 40,
+        "height": 80,
+        "rotation": 0
+    },
+    {
+        "id": 18,
+        "position": [
+            600,
+            40
+        ],
+        "width": 40,
+        "height": 80,
+        "rotation": 0
+    },
+    {
+        "id": 19,
+        "position": [
+            640,
+            40
+        ],
+        "width": 40,
+        "height": 80,
+        "rotation": 0
+    },
+    {
+        "id": 20,
+        "position": [
+            680,
+            40
+        ],
+        "width": 40,
+        "height": 80,
+        "rotation": 0
+    },
+    {
+        "id": "a1",
+        "position": [
+            740,
+            120
+        ],
+        "width": 100,
+        "height": 50,
+        "rotation": 0
+    },
+    {
+        "id": "a2",
+        "position": [
+            740,
+            200
+        ],
+        "width": 100,
+        "height": 50,
+        "rotation": 0
+    },
+    {
+        "id": "a3",
+        "position": [
+            740,
+            280
+        ],
+        "width": 100,
+        "height": 50,
+        "rotation": 0
+    },
+    {
+        "id": "a4",
+        "position": [
+            740,
+            360
+        ],
+        "width": 100,
+        "height": 50,
+        "rotation": 0
+    },
+    {
+        "id": "a5",
+        "position": [
+            740,
+            440
+        ],
+        "width": 100,
+        "height": 50,
+        "rotation": 0
+    },
+    {
+        "id": "a6",
+        "position": [
+            740,
+            520
+        ],
+        "width": 100,
+        "height": 50,
+        "rotation": 0
+    }
+]
