@@ -45,7 +45,7 @@ const Home: React.FC = () => {
     <View style={styles.itemContainer}>
       <Text style={styles.deviceIdText}>Device ID : {item.id}</Text>
       <Text>Last TimeStamp: {item.time}</Text>
-      {/* <Text>Status: {item.status}</Text> */}
+      <Text>Power: {item.power}</Text>
       {/* <Text>Value: {item.value}</Text> */}
       <Image
         source={item.status === 'on' ? plsOnImagePath : plsOffImagePath}

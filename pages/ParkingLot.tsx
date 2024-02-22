@@ -16,14 +16,15 @@ const ParkingLot: React.FC = () => {
         <View style={styles.parkingLotContainer}>
           {parkingSpacesData.map((space) => {
             const { id, position, width, height, rotation } = space;
-            const isOccupied = deviceData[space.id] && deviceData[space.id].status === 'on';
+            const isCarOn = deviceData[space.id] && deviceData[space.id].status === 'on';
+            const isPowerOn = deviceData[space.id] && deviceData[space.id].power === 'on';
             const spaceStyle: ViewStyle = {
               position: 'absolute',
               left: position[0],
               top: position[1],
               width: width,
               height: height,
-              backgroundColor: isOccupied ? '#FF4C4C' : '#aaff00',
+              backgroundColor: isCarOn ? (isPowerOn ? '#FF4C4C' : '#8a2929') : (isPowerOn ? '#aaff00' : '#5c8a01'),
               transform: [{ rotate: `${rotation}deg` }],
               justifyContent: 'center', // 올바른 타입의 값 제공
               alignItems: 'center', // 올바른 타입의 값 제공
