@@ -17,17 +17,14 @@ import { RootState } from '../redux/store';
 const plsOnImagePath = require('../assets/img/PLS_on.png');
 const plsOffImagePath = require('../assets/img/PLS_off.png');
 
-// 화면 너비 가져오기
-const windowWidth = Dimensions.get('window').width;
-// 아이템 사이의 여백을 고려하여 각 아이템의 너비 계산
-const itemWidth = windowWidth / 3 - 10 * 2;
-
 const Home: React.FC = () => {
   const deviceData = useSelector((state: RootState) => state.device.deviceData);
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? "#000000" : "#ffffff",
+    flex:1
   };
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   
   const deviceArray = Object.keys(deviceData).map(key => ({
     id: key,
@@ -40,17 +37,22 @@ const Home: React.FC = () => {
   // 화면 너비가 높이보다 크면 가로 모드, 아니면 세로 모드
   const numColumns = width > height ? 3 : 2;
   const flatListKey = numColumns.toString();
+  const itemWidth = width / numColumns - 10 * 2;
+
+  useEffect(() => {
+    // numColumns가 변경될 때마다 imageSize를 업데이트합니다.
+    const newWidth = width / numColumns - 10 * 2;
+    setImageSize({ width: newWidth, height: newWidth });
+  }, [numColumns]);
 
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <View style={[styles.itemContainer, { width: imageSize.width }]}>
       <Text style={styles.deviceIdText}>Device ID : {item.id}</Text>
       <Text>Last TimeStamp: {item.time}</Text>
-      <Text>Power: {item.power}</Text>
-      {/* <Text>Value: {item.value}</Text> */}
       <Image
         source={item.status === 'on' ? plsOnImagePath : plsOffImagePath}
-        style={styles.plsImage}
-        resizeMode='center'
+        style={[styles.plsImage, { width: imageSize.width, height: imageSize.height }]}
+        resizeMode= 'contain'
       />
     </View>
   );
@@ -76,7 +78,6 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     margin: 10,
-    width: itemWidth,
     // height 속성을 제거하여 내용물에 따라 높이가 자동으로 조정되도록 함
     justifyContent: 'center',
     alignItems: 'center',
@@ -90,9 +91,8 @@ const styles = StyleSheet.create({
     // textAlign: 'center', // 텍스트 정렬 (옵션)
   },
   plsImage: {
-    width: '100%',
     // 이미지의 높이를 동적으로 조정하려면, 예를 들어 비율을 사용할 수 있음
-    aspectRatio: 1, // 가로 세로 비율을 1:1로 설정
+    // aspectRatio: 1, // 가로 세로 비율을 1:1로 설정
   }
 });
 

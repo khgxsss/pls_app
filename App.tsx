@@ -14,6 +14,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './pages/Home';
 import ParkingLot from './pages/ParkingLot';
+import ViewHistory from './pages/ViewHistory';
 import { useDispatch } from 'react-redux';
 import { setDeviceData } from './redux/deviceSlice';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -88,7 +89,12 @@ const App: React.FC = () => {
           }}/>
         <Tab.Screen name="Parking Lot" component={ParkingLot} options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="home" color={color} size={size} />
+            <MaterialIcons name="local-parking" color={color} size={size} />
+          ),
+        }}/>
+        <Tab.Screen name="View History" component={ViewHistory} options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="history" color={color} size={size} />
           ),
         }}/>
       </Tab.Navigator>
