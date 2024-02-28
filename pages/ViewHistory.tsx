@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { ScrollView, Text, TextInput, Button, StyleSheet, View, Modal, Dimensions, FlatList } from 'react-native';
 import axios from 'axios';
 import DatePicker from 'react-native-date-picker';
-import { LineChart } from 'react-native-chart-kit';
-import { ChartConfig } from 'react-native-chart-kit/dist/HelperTypes';
 
 interface Record {
   timestamp: string;
@@ -20,11 +18,17 @@ const ViewHistory: React.FC = () => {
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
 
   const fetchRecords = async () => {
+    const startOfDay = new Date(startDate);
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date(endDate);
+    endOfDay.setHours(23, 59, 59, 999);
+    endOfDay.setDate(endOfDay.getDate() + 1); // 종료 날짜에 하루 추가
+
     try {
       const response = await axios.get('http://14.50.159.2:19999/dbcall', {
         params: {
           table: table,
-          period: `${startDate.toISOString().split('T')[0]}to${endDate.toISOString().split('T')[0]}`,
+          period: `${startOfDay.toISOString().split('T')[0]}to${endOfDay.toISOString().split('T')[0]}`,
           device_id: deviceId,
           user_id: userId,
         },
@@ -36,20 +40,9 @@ const ViewHistory: React.FC = () => {
     }
   };
 
-  const chartConfig: ChartConfig = {
-    backgroundColor: '#e26a00',
-    backgroundGradientFrom: '#fb8c00',
-    backgroundGradientTo: '#ffa726',
-    decimalPlaces: 0,
-    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-    style: {
-      borderRadius: 16,
-    },
-  };
-
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.header}>View Device History</Text>
+      <Text style={styles.header}>Select date and device id</Text>
       
       <Text style={styles.label}>Start Date:</Text>
       <DatePicker date={startDate} onDateChange={setStartDate} mode="date" />
@@ -81,7 +74,8 @@ const ViewHistory: React.FC = () => {
         placeholder="devices or devices_all"
       />
       
-      <Button title="Fetch History" onPress={fetchRecords} />
+      <Button title="Fetch History" onPress={fetchRecords}/>
+      <View style={{marginBottom:30}}></View>
       <Modal visible={isModalVisible} animationType="slide" onRequestClose={() => setModalVisible(false)}>
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>Device Usage History</Text>
@@ -94,6 +88,7 @@ const ViewHistory: React.FC = () => {
                 <Text style={styles.recordCell}>{item.user_id}</Text>
                 <Text style={styles.recordCell}>{item.last_updated}</Text>
                 <Text style={styles.recordCell}>{item.device_status.toUpperCase()}</Text>
+                <Text style={styles.recordCell}>{item.power}</Text>
               </View>
             )}
           />
@@ -108,6 +103,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingLeft: 30,
+    paddingRight: 30,
     paddingBottom: 30,
   },
   header: {

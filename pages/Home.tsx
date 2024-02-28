@@ -27,7 +27,7 @@ const Home: React.FC = () => {
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   
   const deviceArray = Object.keys(deviceData).map(key => ({
-    id: key,
+    key_rid: key,
     ...deviceData[key],
   }));
 
@@ -37,7 +37,6 @@ const Home: React.FC = () => {
   // 화면 너비가 높이보다 크면 가로 모드, 아니면 세로 모드
   const numColumns = width > height ? 3 : 2;
   const flatListKey = numColumns.toString();
-  const itemWidth = width / numColumns - 10 * 2;
 
   useEffect(() => {
     // numColumns가 변경될 때마다 imageSize를 업데이트합니다.

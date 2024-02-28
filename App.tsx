@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Client, Message, IClientOptions } from 'react-native-paho-mqtt';
+import init from 'react_native_mqtt';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './pages/Home';
@@ -21,21 +21,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Tab = createBottomTabNavigator();
 
-// AsyncStorage 기반 스토리지 클래스 구현
-class Storage {
-  static setItem(key: string, item: string): Promise<void> {
-    return AsyncStorage.setItem(key, item);
-  }
-
-  static getItem(key: string): Promise<string | null> {
-    return AsyncStorage.getItem(key);
-  }
-
-  static removeItem(key: string): Promise<void> {
-    return AsyncStorage.removeItem(key);
-  }
-}
-
 const App: React.FC = () => {
 
   const isDarkMode = useColorScheme() === 'dark';
@@ -44,40 +29,63 @@ const App: React.FC = () => {
   };
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const options: IClientOptions = {
-      uri: 'ws://14.50.159.2:1884/',
-      clientId: 'client1',
-      storage: new Storage(), // AsyncStorage 기반 스토리지 사용
-    };
-    const client = new Client(options);
+  // MQTT 클라이언트 초기화 및 설정
+  const initializeMQTT = () => {
+    init({
+      size: 10000,
+      storageBackend: AsyncStorage,
+      defaultExpires: 1000 * 3600 * 24,
+      enableCache: true,
+      reconnect: true,
+      sync: {},
+    });
+  };
 
-    client.on('connectionLost', (responseObject: object) => {
-      if ((responseObject as any).errorCode !== 0) {
-        console.log('onConnectionLost:' + (responseObject as any).errorMessage);
+  useEffect(() => {
+    initializeMQTT();
+
+    // 클라이언트 생성 및 옵션 설정
+    const client = new Paho.MQTT.Client('ws://14.50.159.2:1884/', 'client1');
+
+    // 연결 로스트 시 처리
+    client.onConnectionLost = (error: { errorCode: number, errorMessage: string,invocationContext:string }) => {
+      if (error.errorCode !== 0) {
+        console.log('onConnectionLost:' + error.errorMessage);
+        if (error.errorCode ===7){
+          console.log("Need Wifi or Cellular activated")
+        }
+        // 여기에 재연결 로직을 추가할 수 있습니다.
+      }
+    };
+
+    // 메시지 수신 시 처리
+    client.onMessageArrived = (message: {topic: string, payloadString: string }) => {
+      console.log('onMessageArrived:' + message.payloadString);
+      // 메시지 처리 로직을 추가할 수 있습니다.
+      dispatch(setDeviceData(JSON.parse(message.payloadString)));
+    };
+
+    // MQTT 서버에 연결
+    client.connect({ 
+      onSuccess: () => {
+        console.log('Connected');
+        client.subscribe('rcn/plc/v1/devices/+/up');
+      },
+      useSSL: false,
+      onFailure: (error:{errorCode:number,errorMessage:string,invocationContext:string}) => {
+        console.log('Connection failed:', error.errorMessage);
+        if (error.errorCode ===7){
+          console.log("Need Wifi or Cellular activated")
+        }
       }
     });
-
-    client.on('messageReceived', (message: Message) => {
-      // console.log('onMessageArrived:' + message.payloadString);
-      const data = JSON.parse(message.payloadString);
-      // deviceData 상태 업데이트
-      dispatch(setDeviceData(data));
-    });
-
-    client.connect()
-      .then(() => {
-        console.log('Connected');
-        return client.subscribe(`rcn/plc/v1/devices/+/up`);
-      })
-      .catch((error: any) => console.log(error));
 
     return () => {
       if (client.isConnected()) {
         client.disconnect();
       }
     };
-  }, [dispatch]);
+  }, []);
 
   return (
     <NavigationContainer>

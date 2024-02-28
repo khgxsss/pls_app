@@ -3517,11 +3517,6 @@
   "resolved" "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz"
   "version" "5.0.1"
 
-"events@^1.1.1":
-  "integrity" "sha512-kEcvvCBByWXGnZy6JUlgAp2gBIUjfCAV6P6TgT1/aaQKcmuAEC4OZTV1I4EWQLz2gxZw76atuVyvHhTxvi0Flw=="
-  "resolved" "https://registry.npmjs.org/events/-/events-1.1.1.tgz"
-  "version" "1.1.1"
-
 "execa@^5.0.0", "execa@^5.1.1":
   "integrity" "sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg=="
   "resolved" "https://registry.npmjs.org/execa/-/execa-5.1.1.tgz"
@@ -5800,6 +5795,13 @@
   "resolved" "https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz"
   "version" "1.2.1"
 
+"react_native_mqtt@^1.3.1":
+  "integrity" "sha512-G7xlNwNvvbm+kGRuJUDeK2ij7SlHt2K06bJ56WyxOyMKiHccmm+cCT/PhoJaY6OtYXC3Mq17oGQVHSpu6mQeMQ=="
+  "resolved" "https://registry.npmjs.org/react_native_mqtt/-/react_native_mqtt-1.3.1.tgz"
+  "version" "1.3.1"
+  dependencies:
+    "react-native-storage" "^0.1.2"
+
 "react-devtools-core@^4.27.7":
   "integrity" "sha512-cq/o30z9W2Wb4rzBefjv5fBalHU0rJGZCHAkf/RHSBWSSYwh8PlQTqqOJmgIIbBtpj27T6FIPXeomIjZtCNVqA=="
   "resolved" "https://registry.npmjs.org/react-devtools-core/-/react-devtools-core-4.28.5.tgz"
@@ -5878,13 +5880,6 @@
     "prop-types" "^15.6.2"
     "react-native-animatable" "1.3.3"
 
-"react-native-paho-mqtt@^0.1.1":
-  "integrity" "sha512-SbiAQA+BsfSoMkFZUUEdwmVpDeYMvP1CfGUBiBYWzqTsINWBjd9kPLGK+xJR7tUSBx7NcmYLliUWkqzwa9gZxw=="
-  "resolved" "https://registry.npmjs.org/react-native-paho-mqtt/-/react-native-paho-mqtt-0.1.1.tgz"
-  "version" "0.1.1"
-  dependencies:
-    "events" "^1.1.1"
-
 "react-native-reanimated@^3.7.1":
   "integrity" "sha512-bapCxhnS58+GZynQmA/f5U8vRlmhXlI/WhYg0dqnNAGXHNIc+38ahRWcG8iK8e0R2v9M8Ky2ZWObEC6bmweofg=="
   "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.7.1.tgz"
@@ -5907,6 +5902,11 @@
   dependencies:
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
+
+"react-native-storage@^0.1.2":
+  "integrity" "sha512-k8Kbbss8IgbUUWlht8sEIPiowMsv8mY+QbBG23Pjk38+g8NwxyYxMJtIyYj9SpP2xaMZLQ67JFAEbTHsstZ8gg=="
+  "resolved" "https://registry.npmjs.org/react-native-storage/-/react-native-storage-0.1.5.tgz"
+  "version" "0.1.5"
 
 "react-native-svg@^14.1.0", "react-native-svg@> 6.4.1":
   "integrity" "sha512-HeseElmEk+AXGwFZl3h56s0LtYD9HyGdrpg8yd9QM26X+d7kjETrRQ9vCjtxuT5dCZEIQ5uggU1dQhzasnsCWA=="
